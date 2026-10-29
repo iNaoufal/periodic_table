@@ -17,8 +17,8 @@ RESULT=$($PSQL "
     JOIN properties p USING (atomic_number)
     JOIN types t USING (type_id)
     WHERE e.atomic_number::text = '$INPUT'
-       OR e.symbol = '$INPUT'
-       OR e.name = '$INPUT'
+       OR LOWER(e.symbol) = LOWER('$INPUT')
+       OR LOWER(e.name) = LOWER('$INPUT')
     LIMIT 1;
 ")
 
